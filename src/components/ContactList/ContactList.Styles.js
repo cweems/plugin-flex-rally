@@ -24,6 +24,8 @@ export const ContactListStyles = styled('div')`
       
       a {
         float: right;
+        font-size: 14px;
+        color: linear-gradient(to top, rgb(25, 118, 210), rgb(25, 118, 210));
       }
     }
   }

@@ -14,6 +14,7 @@ export default class ContactList extends React.Component {
             workerAvailable: Manager.getInstance().workerClient.activity
                 .available,
             contacts: [],
+            airtableId: "",
         };
 
         Manager.getInstance().workerClient.on("activityUpdated", (worker) => {
@@ -44,8 +45,11 @@ export default class ContactList extends React.Component {
         fetch("http://localhost:3001/getcontacts", options)
             .then((resp) => resp.json())
             .then((data) => {
+                let airtableId = data[0]._table._base._id;
+
                 this.setState({
                     contacts: data,
+                    airtableId: airtableId,
                 });
             });
     }
@@ -56,7 +60,12 @@ export default class ContactList extends React.Component {
                 <div className="header">
                     <h1>CONTACTS</h1>
                     <span>
-                        <a href="hello">Open Airtable</a>
+                        <a
+                            href={`https://airtable.com/${this.state.airtableId}`}
+                            target="_blank"
+                        >
+                            Open Airtable
+                        </a>
                     </span>
                 </div>
                 <ul>
