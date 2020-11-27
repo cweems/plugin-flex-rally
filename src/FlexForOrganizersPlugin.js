@@ -4,7 +4,7 @@ import { FlexPlugin } from 'flex-plugin';
 
 import reducers, { namespace } from './states';
 
-import ContactList from './components/ContactList/ContactList';
+import TabWindowContainer from './components/Tabs/TabWindow.container';
 
 const PLUGIN_NAME = 'FlexForOrganizersPlugin';
 
@@ -23,7 +23,7 @@ export default class FlexForOrganizersPlugin extends FlexPlugin {
   init(flex, manager) {
     this.registerReducers(manager);
 
-    flex.CRMContainer.Content.replace(<ContactList key="contact-list" />)
+    flex.CRMContainer.Content.replace(<TabWindowContainer key="tab-container" />)
   }
   /**
    * Registers the plugin reducers
