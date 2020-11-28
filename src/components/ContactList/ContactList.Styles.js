@@ -1,9 +1,10 @@
 import { default as styled } from 'react-emotion';
+import {defaultPadding} from '../shared/styles';
 
 const borderColor = 'rgb(198, 202, 215)'
 
 export const ContactListStyles = styled('div')`
-  padding: 20px;
+  padding: ${defaultPadding};
   margin: 0px;
   font-size: 16px;
 

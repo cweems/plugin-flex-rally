@@ -1,4 +1,5 @@
 import React from "react";
+import ContactAttributes from "../ContactAttributes/ContactAttributes";
 
 import { FormStyles } from "./Form.Styles";
 
@@ -9,23 +10,44 @@ export default class Form extends React.Component {
         this.state = {
             contact: null,
         };
+
+        this.getContactData = this.getContactData.bind(this);
     }
 
-    // if task attributes has airtable ID, pull in airtable data
+    componentWil;
 
-    // if there is no airtable ID present, query airtable by phone number
+    componentDidMount() {
+        this.getContactData();
+    }
 
-    // if there is no result in airtable, create a new contact
+    getContactData() {
+        let contact;
+        if (this.props.task.hasOwnProperty("recordId")) {
+            contact = this.props.contacts.filter((ct) => {
+                return ct.id === this.props.task.recordId;
+            });
+        }
+
+        if (contact.length > 0) {
+            contact = contact[0];
+        }
+
+        this.setState({
+            contact: contact,
+        });
+    }
 
     getNotes() {}
 
     saveNote() {}
 
     render() {
-        return (
-            <FormStyles>
-                <p>{this.props.taskSid}</p>
-            </FormStyles>
-        );
+        let contact;
+        if (this.state.contact) {
+            contact = <ContactAttributes fields={this.state.contact.fields} />;
+        } else {
+            contact = "new contact";
+        }
+        return <FormStyles>{contact}</FormStyles>;
     }
 }
