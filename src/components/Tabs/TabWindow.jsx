@@ -95,12 +95,19 @@ export default class TabWindow extends Component {
         let tabs = [];
 
         for (let [key, value] of this.state.tablist.entries()) {
+            let name;
+            if (value.channelType === "sms") {
+                name = value.name;
+            } else {
+                name = value.from;
+            }
+
             tabs.push(
                 <Tab key={key}>
-                    {value.from}
+                    {name}
                     <a
                         className="close"
-                        name={value.from}
+                        name={name}
                         onClick={(e) => this.removeTab(e)}
                     />
                 </Tab>

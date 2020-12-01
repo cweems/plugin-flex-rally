@@ -1,0 +1,84 @@
+{
+    "description": "Bot flow for creating a Flex messaging task",
+    "states": [
+        {
+            "name": "Trigger",
+            "type": "trigger",
+            "transitions": [
+                {
+                    "next": "GetAgentUsername",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "incomingCall"
+                },
+                {
+                    "event": "incomingRequest"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 0,
+                    "y": -10
+                }
+            }
+        },
+        {
+            "name": "SendMessageToAgent",
+            "type": "send-to-flex",
+            "transitions": [
+                {
+                    "event": "callComplete"
+                },
+                {
+                    "event": "failedToEnqueue"
+                },
+                {
+                    "event": "callFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 40,
+                    "y": 430
+                },
+                "workflow": "WWf42f20da19b5d52de4b7f0135728497b",
+                "channel": "TC6af7c8e234d4d6fbc3f87a5e1fbba262",
+                "attributes": "{\"name\": \"{{trigger.message.ChannelAttributes.from}}\", \"channelType\": \"{{trigger.message.ChannelAttributes.channel_type}}\", \"channelSid\": \"{{trigger.message.ChannelSid}}\", \"agent\":  \"{{widgets.GetAgentUsername.parsed.agentUsername}}\", \"recordId\":\"{{widgets.GetAgentUsername.parsed.recordId}}\"}"
+            }
+        },
+        {
+            "name": "GetAgentUsername",
+            "type": "run-function",
+            "transitions": [
+                {
+                    "next": "SendMessageToAgent",
+                    "event": "success"
+                },
+                {
+                    "event": "fail"
+                }
+            ],
+            "properties": {
+                "service_sid": "ZS3fd0cdeffa8161a1d63e11a4a628ffee",
+                "environment_sid": "ZEd85ad8f7a16aeb23d116e554ed0f3b66",
+                "offset": {
+                    "x": 30,
+                    "y": 180
+                },
+                "function_sid": "ZH820948acfc4186bb97445bb4c3b1e483",
+                "parameters": [
+                    {
+                        "value": "{{trigger.message.ChannelAttributes.from}}",
+                        "key": "phone"
+                    }
+                ],
+                "url": "https://serverless-9462-dev.twil.io/getuserbycontactphone"
+            }
+        }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+        "allow_concurrent_calls": true
+    }
+}

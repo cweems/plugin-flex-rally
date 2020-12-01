@@ -1,0 +1,84 @@
+{
+  "description": "IVR for creating a Flex voice task",
+  "states": [
+    {
+      "name": "Trigger",
+      "type": "trigger",
+      "transitions": [
+        {
+          "event": "incomingMessage"
+        },
+        {
+          "next": "GetAgentUsername",
+          "event": "incomingCall"
+        },
+        {
+          "event": "incomingRequest"
+        }
+      ],
+      "properties": {
+        "offset": {
+          "x": 0,
+          "y": -10
+        }
+      }
+    },
+    {
+      "name": "SendCallToAgent",
+      "type": "send-to-flex",
+      "transitions": [
+        {
+          "event": "callComplete"
+        },
+        {
+          "event": "failedToEnqueue"
+        },
+        {
+          "event": "callFailure"
+        }
+      ],
+      "properties": {
+        "offset": {
+          "x": 30,
+          "y": 450
+        },
+        "workflow": "WWa6f9e0c7321e848d2e595dcda35b137c",
+        "channel": "TC2adef257ae9a23ce6a3874da5d0e980b",
+        "attributes": "{ \"type\": \"inbound\", \"name\": \"{{trigger.call.From}}\", \"agent\":  \"{{widgets.GetAgentUsername.parsed.agentUsername}}\", \"recordId\":\"{{widgets.GetAgentUsername.parsed.recordId}}\"}"
+      }
+    },
+    {
+      "name": "GetAgentUsername",
+      "type": "run-function",
+      "transitions": [
+        {
+          "next": "SendCallToAgent",
+          "event": "success"
+        },
+        {
+          "event": "fail"
+        }
+      ],
+      "properties": {
+        "service_sid": "ZS3fd0cdeffa8161a1d63e11a4a628ffee",
+        "environment_sid": "ZEd85ad8f7a16aeb23d116e554ed0f3b66",
+        "offset": {
+          "x": 30,
+          "y": 220
+        },
+        "function_sid": "ZH820948acfc4186bb97445bb4c3b1e483",
+        "parameters": [
+          {
+            "value": "{{trigger.call.From}}",
+            "key": "phone"
+          }
+        ],
+        "url": "https://serverless-9462-dev.twil.io/getuserbycontactphone"
+      }
+    }
+  ],
+  "initial_state": "Trigger",
+  "flags": {
+    "allow_concurrent_calls": true
+  }
+}

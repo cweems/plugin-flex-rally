@@ -3,6 +3,7 @@ import React from "react";
 import { Manager } from "@twilio/flex-ui";
 import CallButtonContainer from "../CallButton/CallButton.Container";
 import { ContactListStyles } from "./ContactList.Styles";
+import MessageButton from "../MessageButton/MessageButton";
 
 export default class ContactList extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export default class ContactList extends React.Component {
                     <span className="contact-name">{item.fields.Name}</span>
                     <span>{item.fields.Phone}</span>
                     <span>
+                        <MessageButton />
                         <CallButtonContainer
                             phone={item.fields.Phone}
                             recordId={item.id}
