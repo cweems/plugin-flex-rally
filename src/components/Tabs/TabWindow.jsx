@@ -83,14 +83,6 @@ export default class TabWindow extends Component {
         });
     }
 
-    removeTab(e) {
-        let tablist = this.state.tablist;
-        tablist.delete(e.target.from);
-        this.setState({
-            tablist: tablist,
-        });
-    }
-
     createTabs() {
         let tabs = [];
 
@@ -102,16 +94,7 @@ export default class TabWindow extends Component {
                 name = value.from;
             }
 
-            tabs.push(
-                <Tab key={key}>
-                    {name}
-                    <a
-                        className="close"
-                        name={name}
-                        onClick={(e) => this.removeTab(e)}
-                    />
-                </Tab>
-            );
+            tabs.push(<Tab key={key}>{name}</Tab>);
         }
         return tabs;
     }
