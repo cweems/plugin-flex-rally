@@ -3,6 +3,7 @@ import { Manager } from "@twilio/flex-ui";
 import ContactAttributes from "../ContactAttributes/ContactAttributes";
 
 import { FormStyles } from "./Form.Styles";
+import ContactNotes from "../ContactNotes/ContactNotes";
 
 export default class Form extends React.Component {
     constructor(props) {
@@ -88,10 +89,10 @@ export default class Form extends React.Component {
         let contact = this.getContactData();
         if (contact) {
             contact = (
-                <ContactAttributes
-                    notes={this.state.notes}
-                    fields={contact.fields}
-                />
+                <div>
+                    <ContactAttributes fields={contact.fields} />
+                    <ContactNotes notes={this.state.notes} />
+                </div>
             );
         } else {
             contact = "new contact";
