@@ -17,7 +17,11 @@ export default class ContactList extends React.Component {
                     <span className="contact-name">{item.fields.Name}</span>
                     <span>{item.fields.Phone}</span>
                     <span>
-                        <MessageButton />
+                        <MessageButton
+                            name={item.fields.Name}
+                            phone={item.fields.Phone}
+                            agentStatus={this.props.workerAvailability}
+                        />
                         <CallButtonContainer
                             phone={item.fields.Phone}
                             recordId={item.id}

@@ -57,7 +57,6 @@ export const TabWindowStyles = styled('div')`
 
     .react-tabs__tab-panel--selected {
         display: block;
-        height: 100vh;
     }
 
     /* Custom for Flex */

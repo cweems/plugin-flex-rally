@@ -3,7 +3,6 @@ const Airtable = require('airtable');
 
 
 exports.handler = TokenValidator(function(context, event, callback) {
-    const client = context.getTwilioClient();
 
     const response = new Twilio.Response();
     response.appendHeader('Access-Control-Allow-Origin', '*');

@@ -10,15 +10,15 @@ export default class Form extends React.Component {
         super(props);
 
         this.state = {
-            contact: null,
             notes: null,
         };
 
         this.getContactData = this.getContactData.bind(this);
+        this.getNotes = this.getNotes.bind(this);
     }
 
-    getContactData(newProps) {
-        let props = newProps || this.props;
+    getContactData(nextProps) {
+        let props = nextProps || this.props;
 
         let contact = [];
         if (props.task) {
@@ -42,7 +42,9 @@ export default class Form extends React.Component {
             this.getNotes(contact.fields.Notes);
         }
 
-        return contact;
+        this.setState({
+            contact: contact,
+        });
     }
 
     getNotes(noteIds) {
@@ -63,7 +65,9 @@ export default class Form extends React.Component {
                 };
 
                 fetch(
-                    `http://localhost:3001/getnotesbycontact?note=${note}`,
+                    `${
+                        Manager.getInstance().configuration.serviceBaseUrl
+                    }/getnotesbycontact?note=${note}`,
                     options
                 )
                     .then((resp) => resp.json())
@@ -83,15 +87,24 @@ export default class Form extends React.Component {
         });
     }
 
-    saveNote() {}
+    componentWillMount() {
+        this.getContactData();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.getContactData(nextProps);
+    }
 
     render() {
-        let contact = this.getContactData();
-        if (contact) {
+        let contact;
+        if (this.state.contact) {
             contact = (
                 <div>
-                    <ContactAttributes fields={contact.fields} />
-                    <ContactNotes notes={this.state.notes} />
+                    <ContactAttributes fields={this.state.contact.fields} />
+                    <ContactNotes
+                        notes={this.state.notes}
+                        contactId={this.state.contact.id}
+                    />
                 </div>
             );
         } else {

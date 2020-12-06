@@ -1,7 +1,6 @@
 const Airtable = require('airtable');
 
 exports.handler = function(context, event, callback) {
-  const client = context.getTwilioClient();
 
   console.log('Running function');
 

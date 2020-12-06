@@ -35,7 +35,14 @@ export default class TabWindow extends Component {
                 },
             };
 
-            fetch("http://localhost:3001/getcontacts", options)
+            debugger;
+
+            fetch(
+                `${
+                    Manager.getInstance().configuration.serviceBaseUrl
+                }/getcontacts`,
+                options
+            )
                 .then((resp) => resp.json())
                 .then((data) => {
                     let airtableBaseId = data[0]._table._base._id;
