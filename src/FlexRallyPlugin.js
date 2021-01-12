@@ -6,9 +6,9 @@ import reducers, { namespace } from './states';
 
 import TabWindowContainer from './components/Tabs/TabWindow.container';
 
-const PLUGIN_NAME = 'FlexForOrganizersPlugin';
+const PLUGIN_NAME = 'FlexRallyPlugin';
 
-export default class FlexForOrganizersPlugin extends FlexPlugin {
+export default class FlexRallyPlugin extends FlexPlugin {
   constructor() {
     super(PLUGIN_NAME);
   }

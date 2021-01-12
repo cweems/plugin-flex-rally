@@ -1,4 +1,4 @@
 import * as FlexPlugin from 'flex-plugin';
-import FlexForOrganizersPlugin from './FlexForOrganizersPlugin';
+import FlexRallyPlugin from './FlexRallyPlugin';
 
-FlexPlugin.loadPlugin(FlexForOrganizersPlugin);
+FlexPlugin.loadPlugin(FlexRallyPlugin);

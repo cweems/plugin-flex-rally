@@ -35,8 +35,6 @@ export default class TabWindow extends Component {
                 },
             };
 
-            debugger;
-
             fetch(
                 `${
                     Manager.getInstance().configuration.serviceBaseUrl
@@ -45,11 +43,13 @@ export default class TabWindow extends Component {
             )
                 .then((resp) => resp.json())
                 .then((data) => {
+                    debugger;
                     let airtableBaseId = data[0]._table._base._id;
 
                     this.props.contactsLoaded(data);
                     this.props.setAirtableBaseId(airtableBaseId);
                 });
+            // .catch((err) => console.log(err));
         }
     }
 

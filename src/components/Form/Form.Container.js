@@ -5,7 +5,7 @@ import { Actions } from "../../states/ContactListState";
 import Form from "./Form";
 
 const mapStateToProps = (state, ownProps) => ({
-    contacts: state["flex-for-organizers"].contactList.contacts,
+    contacts: state["flex-rally"].contactList.contacts,
     airtableRecordId: ownProps.airtableRecordId,
 });
 

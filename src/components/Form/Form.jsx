@@ -3,6 +3,7 @@ import { Manager } from "@twilio/flex-ui";
 import ContactAttributes from "../ContactAttributes/ContactAttributes";
 
 import { FormStyles } from "./Form.Styles";
+import NewContact from "../NewContact/NewContact";
 import ContactNotes from "../ContactNotes/ContactNotes";
 
 export default class Form extends React.Component {
@@ -11,6 +12,7 @@ export default class Form extends React.Component {
 
         this.state = {
             notes: null,
+            noContactExists: false,
         };
 
         this.getContactData = this.getContactData.bind(this);
@@ -22,7 +24,10 @@ export default class Form extends React.Component {
 
         let contact = [];
         if (props.task) {
-            if (props.task.hasOwnProperty("recordId")) {
+            if (
+                props.task.hasOwnProperty("recordId") &&
+                props.contacts.length > 0
+            ) {
                 contact = props.contacts.filter((ct) => {
                     return ct.id === props.task.recordId;
                 });
@@ -32,6 +37,10 @@ export default class Form extends React.Component {
         if (contact.length > 0) {
             contact = contact[0];
         } else {
+            this.setState({
+                noContactExists: true,
+            });
+
             return;
         }
 
@@ -107,8 +116,12 @@ export default class Form extends React.Component {
                     />
                 </div>
             );
+        } else if (this.state.noContactExists === false) {
+            contact = "Loading contact data...";
+        } else if (this.state.noContactExists === true) {
+            contact = <NewContact />;
         } else {
-            contact = "new contact";
+            contact = "An error occured";
         }
         return <FormStyles>{contact}</FormStyles>;
     }

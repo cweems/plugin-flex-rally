@@ -5,7 +5,7 @@ import { Actions } from "../../states/ContactListState";
 import CallButton from "./CallButton";
 
 const mapStateToProps = (state) => ({
-    workerAvailability: state["flex-for-organizers"].contactList.workerAvailability
+    workerAvailability: state["flex-rally"].contactList.workerAvailability
 });
 
 const mapDispatchToProps = (dispatch) => ({

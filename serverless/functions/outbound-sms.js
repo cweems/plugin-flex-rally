@@ -22,7 +22,8 @@ exports.handler = TokenValidator(function(context, event, callback) {
                         name: event.to,
                         from: context.FLEX_OUTBOUND_NUMBER,
                         targetWorker: event.contact_uri,
-                        autoAnswer: 'true'
+                        autoAnswer: 'true',
+                        recordId: event.record_id,
                     }),
                     identity: `sms_${event.to}`,
                     chatFriendlyName: `Outbound Chat with ${event.to}`,

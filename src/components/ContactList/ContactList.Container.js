@@ -5,9 +5,9 @@ import { Actions } from "../../states/ContactListState";
 import ContactList from "./ContactList";
 
 const mapStateToProps = (state) => ({
-    contacts: state["flex-for-organizers"].contactList.contacts,
-    airtableBaseId: state["flex-for-organizers"].contactList.airtableBaseId,
-    workerAvailability: state["flex-for-organizers"].contactList.workerAvailability
+    contacts: state["flex-rally"].contactList.contacts,
+    airtableBaseId: state["flex-rally"].contactList.airtableBaseId,
+    workerAvailability: state["flex-rally"].contactList.workerAvailability
 });
 
 const mapDispatchToProps = (dispatch) => ({

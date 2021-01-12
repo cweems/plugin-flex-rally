@@ -10,6 +10,7 @@ export default function MessageButton(props) {
             to: props.phone,
             name: props.name,
             contact_uri: "client:cweems",
+            record_id: props.recordId,
         };
 
         const options = {
