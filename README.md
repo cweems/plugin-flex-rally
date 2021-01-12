@@ -1,6 +1,22 @@
-# Your custom Twilio Flex Plugin
+# Flex Rally
 
-Twilio Flex Plugins allow you to customize the appearance and behavior of [Twilio Flex](https://www.twilio.com/flex). If you want to learn more about the capabilities and how to use the API, check out our [Flex documentation](https://www.twilio.com/docs/flex).
+Flex Rally is built to help organizers communicate 1:1 with constituents. Flex Rally empowers users with ad-hoc communication abilities as well as a lightweight Airtable contact database. Features:
+
+-   Inbound and Outbound SMS conversations
+-   Inbound and Outbound Voice calls
+-   Lightweight contact and notes database powered by Airtable
+-   Inbound calls routed by Airtable record ownership
+-   New Contact form for unknown first-time inbounds
+-   Screen-pop to existing record from Airtable with note-taking
+
+_Contact List:_
+![Screen Shot 2021-01-11 at 10 12 51 PM](https://user-images.githubusercontent.com/1418949/104277686-20443f00-545c-11eb-82a0-08abd2c8701a.png)
+
+_New Contact Form:_
+![Screen Shot 2021-01-11 at 10 16 36 PM](https://user-images.githubusercontent.com/1418949/104277536-dce9d080-545b-11eb-97da-b3d22834d5e5.png)
+
+_Note Taking Form:_
+![Screen Shot 2021-01-11 at 10 21 03 PM](https://user-images.githubusercontent.com/1418949/104277593-f8ed7200-545b-11eb-848c-c293bbc9f555.png)
 
 ## Setup
 
@@ -9,27 +25,21 @@ Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmj
 Afterwards, install the dependencies by running `npm install`:
 
 ```bash
-cd 
-
-# If you use npm
 npm install
+twilio flex:plugins:start
 ```
 
-## Development
-
-In order to develop locally, you can use the Webpack Dev Server by running:
+Then, start the Twilio Serverless back-end:
 
 ```bash
-npm start
+cd serverless
+npm install
+
+cp .env.example .env
+# Add the credentials from your Twilio Account
+
+twilio serverless:start --live -p 3001
 ```
-
-This will automatically start up the Webpack Dev Server and open the browser for you. Your app will run on `http://localhost:3000`. If you want to change that you can do this by setting the `PORT` environment variable:
-
-```bash
-PORT=3001 npm start
-```
-
-When you make changes to your code, the browser window will be automatically refreshed.
 
 ## Deploy
 
